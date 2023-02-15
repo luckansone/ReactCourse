@@ -6,6 +6,8 @@ const ExpenseForm = (props) => {
     const [amount, setAmount] = useState('');
     const [date, setDate] = useState('');
 
+    const [showForm, setShowForm] = useState(false);
+
     const changeTitleInput = (event) => {
         setTitle(event.target.value);
     };
@@ -33,6 +35,17 @@ const ExpenseForm = (props) => {
         setDate('');
     };
 
+    const onShowHideForm = () => {
+        setShowForm((prevValue)=> {
+            return !prevValue;
+        });
+    };
+
+
+    if (!showForm) {
+        return <button onClick={onShowHideForm}>Add Expense</button>
+    }
+
     return (
     <form onSubmit={submitHandler}>
         <div className='new-expense__controls'>
@@ -50,6 +63,7 @@ const ExpenseForm = (props) => {
             </div>
         </div>
         <div className='new-expense__actions'>
+             <button onClick= {onShowHideForm}>Cancel</button>
             <button type='submit'>Add Expense</button>
         </div>
     </form>
